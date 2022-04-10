@@ -1,7 +1,7 @@
-package com.infernalWhaler.users;
+package com.infernalWhaler.models;
 
-import com.infernalWhaler.deposits.Deposit;
 import com.infernalWhaler.deposits.GiftDeposit;
+import com.infernalWhaler.deposits.IDeposit;
 import com.infernalWhaler.deposits.MealDeposit;
 
 import java.time.LocalDate;
@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
  * @date 10/04/2022
  */
 
-public class User implements IUser {
+public class User {
 
     private String name;
-    private List<Deposit> deposits;
+    private List<IDeposit> deposits;
 
     public User(String name) {
         this.name = name;
@@ -29,28 +29,28 @@ public class User implements IUser {
         return name;
     }
 
-    public List<Deposit> getDeposits() {
+    public List<IDeposit> getDeposits() {
         return deposits;
     }
 
-    public List<MealDeposit> getMealDeposits() {
+    public List<IDeposit> getMealDeposits() {
         return deposits.stream()
                 .filter(MealDeposit.class::isInstance)
-                .map(deposit -> (MealDeposit) deposit)
+                .map(MealDeposit.class::cast)
                 .collect(Collectors.toList());
     }
 
-    public List<GiftDeposit> getGiftDeposits() {
+    public List<IDeposit> getGiftDeposits() {
         return deposits.stream()
                 .filter(GiftDeposit.class::isInstance)
-                .map(deposit -> (GiftDeposit) deposit)
+                .map(GiftDeposit.class::cast)
                 .collect(Collectors.toList());
     }
 
     public Double totalBalance() {
         return getDeposits().stream()
                 .filter(deposit -> LocalDate.now().isBefore(deposit.getExpirationDate()))
-                .mapToDouble(Deposit::getAmount)
+                .mapToDouble(deposit -> deposit.getTransaction().getAmount())
                 .sum();
     }
 
@@ -58,7 +58,7 @@ public class User implements IUser {
         return getDeposits().stream()
                 .filter(GiftDeposit.class::isInstance)
                 .filter(deposit -> LocalDate.now().isBefore(deposit.getExpirationDate()))
-                .mapToDouble(Deposit::getAmount)
+                .mapToDouble(deposit -> deposit.getTransaction().getAmount())
                 .sum();
     }
 
@@ -66,7 +66,7 @@ public class User implements IUser {
         return getDeposits().stream()
                 .filter(MealDeposit.class::isInstance)
                 .filter(deposit -> LocalDate.now().isBefore(deposit.getExpirationDate()))
-                .mapToDouble(Deposit::getAmount)
+                .mapToDouble(deposit -> deposit.getTransaction().getAmount())
                 .sum();
     }
 }

@@ -1,9 +1,10 @@
 package com.infernalWhaler.company;
 
-import com.infernalWhaler.deposits.Deposit;
 import com.infernalWhaler.deposits.GiftDeposit;
+import com.infernalWhaler.deposits.IDeposit;
 import com.infernalWhaler.deposits.MealDeposit;
-import com.infernalWhaler.users.User;
+import com.infernalWhaler.models.Transaction;
+import com.infernalWhaler.models.User;
 
 /**
  * @author sDeseure
@@ -13,7 +14,7 @@ import com.infernalWhaler.users.User;
 
 public class Company implements ICompany {
 
-    private String name;
+    private final String name;
     private Double balance;
 
     public Company(String name, Double balance) {
@@ -33,20 +34,26 @@ public class Company implements ICompany {
         this.balance += balance;
     }
 
-    public void distributeDeposit(final Deposit deposit, final User user) {
-        if (balance < deposit.getAmount()) {
+    @Override
+    public void distributeDeposit(final IDeposit deposit, final User user) {
+        final String depositName = deposit.getTransaction().getName();
+        final Double depositAmount = deposit.getTransaction().getAmount();
+
+        if (balance < depositAmount) {
             System.out.println("Deposit cannot be executed.\n Your Balance is: '€ " + getBalance() + "'");
             return;
         }
 
-        this.balance -= deposit.getAmount();
+        this.balance -= depositAmount;
         final boolean isMaelDeposit = deposit instanceof MealDeposit;
 
         if (isMaelDeposit) {
-            final MealDeposit mealDeposit = new MealDeposit(deposit.getNameSender(), deposit.getAmount(), deposit.getDistributionDate());
+            final MealDeposit mealDeposit = new MealDeposit(new Transaction(depositName, depositAmount),
+                    deposit.getDistributionDate());
             user.getDeposits().add(mealDeposit);
         } else {
-            final GiftDeposit giftDeposit = new GiftDeposit(deposit.getNameSender(), deposit.getAmount(), deposit.getDistributionDate());
+            final GiftDeposit giftDeposit = new GiftDeposit(new Transaction(depositName, depositAmount),
+                    deposit.getDistributionDate());
             user.getDeposits().add(giftDeposit);
         }
     }

@@ -1,7 +1,7 @@
 package com.infernalWhaler.company;
 
-import com.infernalWhaler.deposits.Deposit;
-import com.infernalWhaler.users.User;
+import com.infernalWhaler.deposits.IDeposit;
+import com.infernalWhaler.models.User;
 
 /**
  * @author sDeseure
@@ -11,5 +11,5 @@ import com.infernalWhaler.users.User;
 
 public interface ICompany {
 
-    void distributeDeposit(Deposit deposit, User user);
+    void distributeDeposit(IDeposit deposit, User user);
 }

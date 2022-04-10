@@ -1,5 +1,7 @@
 package com.infernalWhaler.deposits;
 
+import com.infernalWhaler.models.Transaction;
+
 import java.time.LocalDate;
 
 /**
@@ -8,9 +10,9 @@ import java.time.LocalDate;
  * @date 10/04/2022
  */
 
-public class GiftDeposit extends Deposit {
+public class GiftDeposit extends AbstractDeposit {
 
-    public GiftDeposit(String nameSender, Double amount, LocalDate distributionDate) {
-        super(nameSender, amount, distributionDate, distributionDate.plusDays(364));
+    public GiftDeposit(Transaction transaction, LocalDate distributionDate) {
+        super(transaction, distributionDate, distributionDate.plusDays(364));
     }
 }

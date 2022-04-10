@@ -1,8 +1,8 @@
-package com.infernalWhaler.users;
+package com.infernalWhaler.models;
 
 import com.infernalWhaler.company.Company;
-import com.infernalWhaler.deposits.Deposit;
 import com.infernalWhaler.deposits.GiftDeposit;
+import com.infernalWhaler.deposits.IDeposit;
 import com.infernalWhaler.deposits.MealDeposit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,10 +29,10 @@ class UserTest {
         user = new User("Steven");
         wedooGift = new Company("WedooGift", 100.00);
 
-        final Deposit maelOne = new MealDeposit(wedooGift.getName(), 30.0, LocalDate.now());
-        final Deposit giftOne = new GiftDeposit(wedooGift.getName(), 40.0, LocalDate.now());
-        final Deposit giftTwo = new GiftDeposit(wedooGift.getName(), 50.0, LocalDate.now());
-        final Deposit giftThree = new GiftDeposit(wedooGift.getName(), 40.0, LocalDate.of(1983, Month.FEBRUARY, 1));
+        final IDeposit maelOne = new MealDeposit(new Transaction(wedooGift.getName(), 30.0), LocalDate.now());
+        final IDeposit giftOne = new GiftDeposit(new Transaction(wedooGift.getName(), 40.0), LocalDate.now());
+        final IDeposit giftTwo = new GiftDeposit(new Transaction(wedooGift.getName(), 50.0), LocalDate.now());
+        final IDeposit giftThree = new GiftDeposit(new Transaction(wedooGift.getName(), 40.0), LocalDate.of(1983, Month.FEBRUARY, 1));
 
         user.getDeposits().add(maelOne);
         user.getDeposits().add(giftOne);

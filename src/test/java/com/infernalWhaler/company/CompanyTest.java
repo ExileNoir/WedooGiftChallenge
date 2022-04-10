@@ -1,9 +1,10 @@
 package com.infernalWhaler.company;
 
-import com.infernalWhaler.deposits.Deposit;
 import com.infernalWhaler.deposits.GiftDeposit;
+import com.infernalWhaler.deposits.IDeposit;
 import com.infernalWhaler.deposits.MealDeposit;
-import com.infernalWhaler.users.User;
+import com.infernalWhaler.models.Transaction;
+import com.infernalWhaler.models.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,8 +42,8 @@ class CompanyTest {
 
     @Test
     void distributeDepositValid() {
-        final Deposit mealDeposit = new MealDeposit(wedooGift.getName(), 30.0, LocalDate.now());
-        final Deposit giftDeposit = new GiftDeposit(wedooGift.getName(), 40.0, LocalDate.now());
+        final IDeposit mealDeposit = new MealDeposit(new Transaction(wedooGift.getName(), 30.0), LocalDate.now());
+        final IDeposit giftDeposit = new GiftDeposit(new Transaction(wedooGift.getName(), 40.0), LocalDate.now());
         wedooGift.distributeDeposit(mealDeposit, steven);
         wedooGift.distributeDeposit(giftDeposit, steven);
 
@@ -58,9 +59,9 @@ class CompanyTest {
 
     @Test
     void distributeDepositNonValid() {
-        final Deposit mealDeposit = new MealDeposit(wedooGift.getName(), 30.0, LocalDate.now());
-        final Deposit giftDeposit = new GiftDeposit(wedooGift.getName(), 40.0, LocalDate.now());
-        final Deposit giftDepositTwo = new GiftDeposit(wedooGift.getName(), 50.0, LocalDate.now());
+        final IDeposit mealDeposit = new MealDeposit(new Transaction(wedooGift.getName(), 30.0), LocalDate.now());
+        final IDeposit giftDeposit = new GiftDeposit(new Transaction(wedooGift.getName(), 40.0), LocalDate.now());
+        final IDeposit giftDepositTwo = new GiftDeposit(new Transaction(wedooGift.getName(), 50.0), LocalDate.now());
         wedooGift.distributeDeposit(mealDeposit, steven);
         wedooGift.distributeDeposit(giftDeposit, steven);
         wedooGift.distributeDeposit(giftDepositTwo, steven);
