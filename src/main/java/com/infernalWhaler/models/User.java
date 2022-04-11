@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 
 public class User {
 
-    private String name;
-    private List<IDeposit> deposits;
+    private final String name;
+    private final List<IDeposit> deposits;
 
     public User(String name) {
         this.name = name;

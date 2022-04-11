@@ -42,36 +42,50 @@ class UserTest {
 
     @Test
     void getDepositsSize() {
-        assertEquals(4, user.getDeposits().size());
+        final int totalDeposits = user.getDeposits().size();
+
+        assertEquals(4, totalDeposits);
     }
 
     @Test
     void getMealDepositSize() {
-        assertEquals(1, user.getMealDeposits().size());
+        final int totalMealDeposits = user.getMealDeposits().size();
+
+        assertEquals(1, totalMealDeposits);
     }
 
     @Test
     void getGiftDepositSize() {
-        assertEquals(3, user.getGiftDeposits().size());
+        final int totalGiftDeposits = user.getGiftDeposits().size();
+
+        assertEquals(3, totalGiftDeposits);
     }
 
     @Test
     void totalBalanceValid() {
-        assertEquals(120.0, user.totalBalance());
+        final Double totalBalance = user.totalBalance();
+
+        assertEquals(120.0, totalBalance);
     }
 
     @Test
     void totalBalanceNonValid() {
-        assertNotEquals(160.0, user.totalBalance());
+        final Double totalBalance = user.totalBalance();
+
+        assertNotEquals(160.0, totalBalance);
     }
 
     @Test
     void giftBalance() {
-        assertEquals(90.0, user.giftBalance());
+        final Double giftBalance = user.giftBalance();
+
+        assertEquals(90.0, giftBalance);
     }
 
     @Test
     void mealBalance() {
-        assertEquals(30.0, user.mealBalance());
+        final Double mealBalance = user.mealBalance();
+
+        assertEquals(30.0, mealBalance);
     }
 }

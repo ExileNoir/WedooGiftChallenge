@@ -31,13 +31,18 @@ class CompanyTest {
 
     @Test
     void getBalanceValid() {
-        assertEquals(100.0, wedooGift.getBalance());
+        final Double balance = wedooGift.getBalance();
+
+        assertEquals(100.0, balance);
     }
 
     @Test
     void setBalanceValid() {
         wedooGift.setBalance(20.0);
-        assertEquals(120.0, wedooGift.getBalance());
+
+        final Double balance = wedooGift.getBalance();
+
+        assertEquals(120.0, balance);
     }
 
     @Test
@@ -47,14 +52,19 @@ class CompanyTest {
         wedooGift.distributeDeposit(mealDeposit, steven);
         wedooGift.distributeDeposit(giftDeposit, steven);
 
-        assertEquals(30.0, wedooGift.getBalance());
+        final Double companyBalance = wedooGift.getBalance();
+        final int totalDeposits = steven.getDeposits().size();
+        final int totalMealDeposits = steven.getMealDeposits().size();
+        final int totalGiftDeposits = steven.getGiftDeposits().size();
+        final Double mealBalance = steven.mealBalance();
+        final Double giftBalance = steven.giftBalance();
 
-        assertEquals(2, steven.getDeposits().size());
-        assertEquals(1, steven.getMealDeposits().size());
-        assertEquals(1, steven.getGiftDeposits().size());
-
-        assertEquals(30.0, steven.mealBalance());
-        assertEquals(40.0, steven.giftBalance());
+        assertEquals(30.0, companyBalance);
+        assertEquals(2, totalDeposits);
+        assertEquals(1, totalMealDeposits);
+        assertEquals(1, totalGiftDeposits);
+        assertEquals(30.0, mealBalance);
+        assertEquals(40.0, giftBalance);
     }
 
     @Test
@@ -66,13 +76,18 @@ class CompanyTest {
         wedooGift.distributeDeposit(giftDeposit, steven);
         wedooGift.distributeDeposit(giftDepositTwo, steven);
 
-        assertEquals(30.0, wedooGift.getBalance());
+        final Double companyBalance = wedooGift.getBalance();
+        final int totalDeposits = steven.getDeposits().size();
+        final int totalMealDeposits = steven.getMealDeposits().size();
+        final int totalGiftDeposits = steven.getGiftDeposits().size();
+        final Double mealBalance = steven.mealBalance();
+        final Double giftBalance = steven.giftBalance();
 
-        assertNotEquals(3, steven.getDeposits().size());
-        assertEquals(1, steven.getMealDeposits().size());
-        assertNotEquals(2, steven.getGiftDeposits().size());
-
-        assertEquals(30.0, steven.mealBalance());
-        assertNotEquals(90.0, steven.giftBalance());
+        assertEquals(30.0, companyBalance);
+        assertNotEquals(3, totalDeposits);
+        assertEquals(1, totalMealDeposits);
+        assertNotEquals(2, totalGiftDeposits);
+        assertEquals(30.0, mealBalance);
+        assertNotEquals(90.0, giftBalance);
     }
 }

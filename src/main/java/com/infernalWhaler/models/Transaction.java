@@ -8,8 +8,8 @@ package com.infernalWhaler.models;
 
 public class Transaction {
 
-    private String name;
-    private Double amount;
+    private final String name;
+    private final Double amount;
 
     public Transaction(String name, Double amount) {
         this.name = name;
