@@ -29,12 +29,12 @@ class UserTest {
         user = new User("Steven");
         wedooGift = new Company("WedooGift", 100.00);
 
-        final IDeposit maelOne = new MealDeposit(new Transaction(wedooGift.getName(), 30.0), LocalDate.now());
+        final IDeposit mealOne = new MealDeposit(new Transaction(wedooGift.getName(), 30.0), LocalDate.now());
         final IDeposit giftOne = new GiftDeposit(new Transaction(wedooGift.getName(), 40.0), LocalDate.now());
         final IDeposit giftTwo = new GiftDeposit(new Transaction(wedooGift.getName(), 50.0), LocalDate.now());
         final IDeposit giftThree = new GiftDeposit(new Transaction(wedooGift.getName(), 40.0), LocalDate.of(1983, Month.FEBRUARY, 1));
 
-        user.getDeposits().add(maelOne);
+        user.getDeposits().add(mealOne);
         user.getDeposits().add(giftOne);
         user.getDeposits().add(giftTwo);
         user.getDeposits().add(giftThree);

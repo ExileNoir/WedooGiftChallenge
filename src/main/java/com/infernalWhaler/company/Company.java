@@ -45,9 +45,9 @@ public class Company implements ICompany {
         }
 
         this.balance -= depositAmount;
-        final boolean isMaelDeposit = deposit instanceof MealDeposit;
+        final boolean isMealDeposit = deposit instanceof MealDeposit;
 
-        if (isMaelDeposit) {
+        if (isMealDeposit) {
             final MealDeposit mealDeposit = new MealDeposit(new Transaction(depositName, depositAmount),
                     deposit.getDistributionDate());
             user.getDeposits().add(mealDeposit);
