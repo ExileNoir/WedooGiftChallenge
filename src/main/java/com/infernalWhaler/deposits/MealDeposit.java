@@ -6,9 +6,13 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
 /**
+ * Meal Deposit
+ *
  * @author sDeseure
  * @project challenge
  * @date 10/04/2022
+ * @see IDeposit
+ * @see AbstractDeposit
  */
 
 public class MealDeposit extends AbstractDeposit {
